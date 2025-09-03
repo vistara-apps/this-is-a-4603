@@ -19,5 +19,13 @@ module.exports = {
     v3_singleFetch: true,
     v3_throwAbortReason: true,
   },
+  // Add path aliases configuration
+  routes: (defineRoutes) => {
+    return defineRoutes((route) => {
+      // Define your routes here if needed
+    });
+  },
+  // Configure path aliases
+  serverDependenciesToBundle: [/^(?!.*\b(node_modules)\b).*$/],
+  watchPaths: ["./app/**/*"],
 };
-
