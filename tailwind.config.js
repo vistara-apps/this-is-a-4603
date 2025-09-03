@@ -13,8 +13,9 @@ export default {
     },
   },
   plugins: [
-    require('@tailwindcss/aspect-ratio'),
-    require('@tailwindcss/forms'),
-    require('@tailwindcss/typography'),
+    // Using import.meta.require for ESM compatibility
+    await import('@tailwindcss/aspect-ratio').then(m => m.default),
+    await import('@tailwindcss/forms').then(m => m.default),
+    await import('@tailwindcss/typography').then(m => m.default),
   ],
 };
