@@ -1,84 +1,72 @@
 import React, { useRef } from 'react';
-import { Upload, FileImage } from 'lucide-react';
+import { Upload, Image } from 'lucide-react';
 
-const FileUpload = ({ onFilesSelected, variant = 'dragDrop' }) => {
+export default function FileUpload({ onFilesSelected }) {
   const fileInputRef = useRef(null);
 
   const handleDragOver = (e) => {
     e.preventDefault();
+    e.stopPropagation();
   };
 
   const handleDrop = (e) => {
     e.preventDefault();
-    const files = Array.from(e.dataTransfer.files).filter(file => file.type.startsWith('image/'));
-    if (files.length > 0) {
-      onFilesSelected(files);
+    e.stopPropagation();
+    
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      onFilesSelected(e.dataTransfer.files);
     }
   };
 
-  const handleFileSelect = (e) => {
-    const files = Array.from(e.target.files);
-    if (files.length > 0) {
-      onFilesSelected(files);
+  const handleFileInputChange = (e) => {
+    if (e.target.files && e.target.files.length > 0) {
+      onFilesSelected(e.target.files);
     }
   };
 
-  if (variant === 'button') {
-    return (
-      <div>
-        <input
-          ref={fileInputRef}
-          type="file"
-          multiple
-          accept="image/*"
-          onChange={handleFileSelect}
-          className="hidden"
-        />
-        <button
-          onClick={() => fileInputRef.current?.click()}
-          className="bg-primary text-white px-4 py-2 rounded-lg hover:opacity-90 transition-opacity flex items-center space-x-2"
-        >
-          <Upload className="w-4 h-4" />
-          <span>Upload Photos</span>
-        </button>
-      </div>
-    );
-  }
+  const handleButtonClick = () => {
+    fileInputRef.current?.click();
+  };
 
   return (
     <div
+      className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center bg-surface"
       onDragOver={handleDragOver}
       onDrop={handleDrop}
-      className="border-2 border-dashed border-gray-300 rounded-lg p-12 text-center hover:border-primary transition-colors cursor-pointer"
-      onClick={() => fileInputRef.current?.click()}
     >
       <input
-        ref={fileInputRef}
         type="file"
+        ref={fileInputRef}
+        onChange={handleFileInputChange}
+        className="hidden"
         multiple
         accept="image/*"
-        onChange={handleFileSelect}
-        className="hidden"
       />
       
-      <div className="space-y-4">
-        <div className="mx-auto w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center">
-          <FileImage className="w-8 h-8 text-gray-400" />
+      <div className="flex flex-col items-center justify-center space-y-4">
+        <div className="p-4 bg-primary/10 rounded-full">
+          <Image className="w-12 h-12 text-primary" />
         </div>
         
         <div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Upload Animal Photos</h3>
-          <p className="text-gray-600 mb-4">Drag and drop your photos here, or click to browse</p>
-          <button className="bg-primary text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity">
-            Choose Files
-          </button>
+          <h3 className="text-lg font-semibold text-text mb-1">Upload Your Animal Photos</h3>
+          <p className="text-gray-600 mb-4">Drag and drop your files here, or click to browse</p>
         </div>
         
-        <p className="text-sm text-gray-500">Supports: JPG, PNG, GIF (max 10MB each)</p>
+        <button
+          type="button"
+          onClick={handleButtonClick}
+          className="bg-primary text-white px-6 py-2 rounded-lg hover:opacity-90 transition-opacity flex items-center"
+        >
+          <Upload className="w-4 h-4 mr-2" />
+          <span>Select Files</span>
+        </button>
+        
+        <p className="text-sm text-gray-500">
+          Supported formats: JPG, PNG, GIF (max 10MB per file)
+        </p>
       </div>
     </div>
   );
-};
-
-export default FileUpload;
+}
 

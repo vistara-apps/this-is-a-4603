@@ -1,38 +1,23 @@
 import React from 'react';
-import { Search, Bell, User } from 'lucide-react';
 import { Link } from '@remix-run/react';
+import { Camera, User, LogOut } from 'lucide-react';
 
-const NavBar = () => {
+export default function NavBar() {
   return (
-    <nav className="gradient-bg text-white p-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center space-x-4">
-          <Link to="/" className="text-2xl font-bold">Critter Canvas</Link>
-          <span className="text-sm opacity-75">Showcase Beautiful Animal Photos</span>
-        </div>
+    <header className="bg-surface shadow-sm">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+        <Link to="/" className="flex items-center space-x-2">
+          <Camera className="w-6 h-6 text-primary" />
+          <span className="text-xl font-bold text-text">Critter Canvas</span>
+        </Link>
         
         <div className="flex items-center space-x-4">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-white/60" />
-            <input
-              type="text"
-              placeholder="Search photos..."
-              className="bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg pl-10 pr-4 py-2 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/50"
-            />
-          </div>
-          
-          <button className="p-2 hover:bg-white/20 rounded-lg transition-colors">
-            <Bell className="w-5 h-5" />
-          </button>
-          
-          <Link to="/auth/login" className="p-2 hover:bg-white/20 rounded-lg transition-colors">
+          <button className="p-2 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors">
             <User className="w-5 h-5" />
-          </Link>
+          </button>
         </div>
       </div>
-    </nav>
+    </header>
   );
-};
-
-export default NavBar;
+}
 

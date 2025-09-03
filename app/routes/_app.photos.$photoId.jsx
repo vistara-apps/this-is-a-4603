@@ -28,7 +28,7 @@ export const loader = async ({ params }) => {
       id: 3,
       url: 'https://images.unsplash.com/photo-1425082661705-1834bfd09dca?w=800&h=600&fit=crop',
       title: 'Fluffy Rabbit',
-      description: 'An adorable fluffy rabbit in the grass. This is my pet rabbit Snowball who loves to hop around the backyard. He's about 2 years old and has the softest fur.',
+      description: 'An adorable fluffy rabbit in the grass. This is my pet rabbit Snowball who loves to hop around the backyard. He is about 2 years old and has the softest fur.',
       tags: ['rabbit', 'fluffy', 'outdoor'],
       uploadDate: '2024-01-13'
     },
