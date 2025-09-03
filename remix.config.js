@@ -5,7 +5,7 @@ module.exports = {
   // assetsBuildDirectory: "public/build",
   // serverBuildPath: "build/index.js",
   // publicPath: "/build/",
-  serverModuleFormat: "cjs",
+  serverModuleFormat: "esm",
   tailwind: true,
   future: {
     // These flags are now obsolete and can be removed
@@ -19,5 +19,12 @@ module.exports = {
     v3_singleFetch: true,
     v3_throwAbortReason: true,
   },
+  // Add path aliases for imports
+  routes: (defineRoutes) => {
+    return defineRoutes((route) => {
+      // Define your routes here if needed
+    });
+  },
+  // Configure path aliases
+  browserNodeBuiltinsPolyfill: { modules: { path: true } },
 };
-
